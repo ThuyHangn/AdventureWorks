@@ -37,3 +37,14 @@ models:
         descirprion: Number of available vacation hours
       - name: SickLeaveHours
         description: Number of available sick leave hours
+
+  - name: stg_empPayRateHistory
+    description: The history of employee's rate
+    columns:
+      - name: BusinessEntityID
+        description: Foreign key link to employee table
+        test:
+          - not null
+          - relationships:
+              to: ref('stg_employee')
+              field: BusinessEntityID
