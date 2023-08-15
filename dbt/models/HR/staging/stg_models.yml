@@ -1,0 +1,39 @@
+version: 2
+
+models:
+  - name: stg_empCurrentRate
+    description: The current pay rate of customer in company
+    columns:
+      - name: BusinessEntityID
+        description: primary key of table
+        tests:
+          - unique
+          - not null
+      - name: Rate
+        descriptions: rate in dollar
+        # rate would have a test that check the rate positive or not
+      - name: PayFrequency
+        description: "{{doc('Pay_Frequency')}}"
+        tests:
+          - accepted_values:
+              values: [1,2]
+      - name: RateChangeDate
+        description: the date of changing rate
+
+  - name: stg_employee
+    description: The imformation of employee
+    columns:
+      - name: BusinessEntityID
+        description: primary key for table
+        tests:
+          - unique
+          - not null
+      - name: CurrentFlag
+        description: "{{docs('Emp_CurrentFlag')}}"
+        tests:
+          - accepted_values:
+              values: [0,1]
+      - name: VacationHours
+        descirprion: Number of available vacation hours
+      - name: SickLeaveHours
+        description: Number of available sick leave hours
