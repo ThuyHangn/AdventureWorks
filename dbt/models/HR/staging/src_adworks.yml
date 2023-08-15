@@ -1,0 +1,19 @@
+version: 2
+
+sources:
+  - name: hr
+    database: AdventureWorks2022
+    schema: HumanResources
+    tables:
+      - name: Department
+      - name: Employee
+      - name: EmployeeDepartmentHistory
+      - name: EmployeePayHistory
+      - name: JobCandidate
+      - name: Shift
+
+  - name: person
+    database: AdventureWorks2022
+    schema: Person
+    tables:
+      - name: Person
