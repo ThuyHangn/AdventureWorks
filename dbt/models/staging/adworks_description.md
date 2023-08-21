@@ -19,3 +19,15 @@ One of the following values:
 | 1              | Active                                           |
 
 {% enddocs %}
+
+{% docs Shift %}
+
+One of the following values: 
+
+| ID      | Name      | Start time             | End time           |
+|---------|-----------|------------------------|--------------------|
+| 1       | Day       | 07:00                  | 15:00              |
+| 2       | Evening   | 15:00                  | 23:00              |
+| 3       | Night     | 23:00                  | 07:00              |
+
+{% enddocs %}

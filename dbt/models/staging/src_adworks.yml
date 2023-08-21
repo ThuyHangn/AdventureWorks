@@ -17,3 +17,12 @@ sources:
     schema: Person
     tables:
       - name: Person
+      - name: BusinessEntity
+      - name: BusinessEntityAddress
+      - name: AddressType
+
+  - name: sales
+    database: AdventureWorks2022
+    schema: Sales
+    tables:
+      - name: 

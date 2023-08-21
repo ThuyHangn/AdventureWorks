@@ -1,0 +1,33 @@
+version: 2
+
+models:
+  - name: stg_empCureentDepartment
+    description: The current department of employee
+    columns:
+      - name: EmployeeeID
+        description: primary key for table
+        tests:
+          - unique
+          - not_null
+      - name: DepartmentID
+        description: Foreign Key to Dim_Department table
+        tests:
+          - relationships:
+              to: ref('dim_department')
+              field: DepartmentID
+      - name: ShiftID
+        description: '{{doc('Shift')}}'
+        tests:
+          - accepted_values:
+              values: [1,2,3]
+
+  - name: stg_empPayRateHistory
+    description: The history of employee's rate
+    columns:
+      - name: BusinessEntityID
+        description: Foreign key link to EmployeeID column of dim_employee table
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_employee')
+              field: EmployeeID

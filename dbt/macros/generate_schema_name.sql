@@ -3,11 +3,11 @@
     {%- set default_schema = target.schema -%}
     {%- if custom_schema_name is none -%}
 
-        {{ default_schema }}
+        adw
 
     {%- else -%}
 
-        {"Adworks"}_{{ custom_schema_name | trim }}
+        adw_{{ custom_schema_name | trim }}
 
     {%- endif -%}
 
