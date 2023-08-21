@@ -1,0 +1,34 @@
+version: 2
+
+models:
+  - name: dim_department
+    description: The information of department
+    columns:
+      - name: DepartmentID
+        description: The primary key for table
+        tests:
+          - unique
+          - not_null
+      - name: Name 
+        description: The name of department
+      - name: NumberOfEmployee
+        description: The number of employee in deparment
+  
+  - name: dim_employee
+    description: The information of employee
+      columns:
+        - name: EmployeeID
+          description: Primary key for table
+          tests:
+            - unique
+            - not_null
+        - name: AddressID
+          tests:
+            - relationships:
+                to: ref('dim_address')
+                field: AdressID
+        - name: DepartmentID
+          tests:
+            - relationships:
+                to: ref('dim_department')
+                field: DepartmentID
