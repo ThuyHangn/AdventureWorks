@@ -21,6 +21,8 @@ sources:
       - name: BusinessEntityAddress
       - name: AddressType
       - name: Address
+      - name: StateProvince
+      - name: CountryRegion
 
   - name: sales
     database: AdventureWorks2022

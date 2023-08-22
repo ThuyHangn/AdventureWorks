@@ -48,3 +48,13 @@ models:
               to: ref('dim_stateProvince')
               field: StateProvinceID
 
+  - name: dim_stateProvince
+    description: the state province information for address
+    columns:
+      - name: StateProvinceID
+        description: Primary key for table
+        tests:
+          - unique
+          - not_null
+      - name: Territory ID
+        description: Foreign Key to dim_territory table
