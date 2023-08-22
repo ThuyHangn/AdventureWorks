@@ -1,0 +1,60 @@
+version: 2
+
+models:
+  - name: dim_department
+    description: The information of department
+    columns:
+      - name: DepartmentID
+        description: The primary key for table
+        tests:
+          - unique
+          - not_null
+      - name: Name 
+        description: The name of department
+      - name: NumberOfEmployee
+        description: The number of employee in deparment
+  
+  - name: dim_employee
+    description: The information of employee
+    columns:
+      - name: EmployeeID
+        description: Primary key for table
+        tests:
+          - unique
+          - not_null
+      - name: AddressID
+        tests:
+          - relationships:
+              to: ref('dim_address')
+              field: AddressID
+      - name: DepartmentID
+        tests:
+          - relationships:
+              to: ref('dim_department')
+              field: DepartmentID
+
+  - name: dim_address
+    description: The address location of all business entity
+    columns:
+      - name: AddressID
+        description: Primary key for table
+        tests:
+          - unique
+          - not_null
+      - name: StateProvinceID
+        description: Foreign key to dim_stateProvince table
+        tests:
+          - relationships:
+              to: ref('dim_stateProvince')
+              field: StateProvinceID
+
+  - name: dim_stateProvince
+    description: the state province information for address
+    columns:
+      - name: StateProvinceID
+        description: Primary key for table
+        tests:
+          - unique
+          - not_null
+      - name: Territory ID
+        description: Foreign Key to dim_territory table

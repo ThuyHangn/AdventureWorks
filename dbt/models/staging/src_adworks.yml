@@ -1,0 +1,31 @@
+version: 2
+
+sources:
+  - name: hr
+    database: AdventureWorks2022
+    schema: HumanResources
+    tables:
+      - name: Department
+      - name: Employee
+      - name: EmployeeDepartmentHistory
+      - name: EmployeePayHistory
+      - name: JobCandidate
+      - name: Shift
+
+  - name: person
+    database: AdventureWorks2022
+    schema: Person
+    tables:
+      - name: Person
+      - name: BusinessEntity
+      - name: BusinessEntityAddress
+      - name: AddressType
+      - name: Address
+      - name: StateProvince
+      - name: CountryRegion
+
+  - name: sales
+    database: AdventureWorks2022
+    schema: Sales
+    tables:
+      - name: customers
