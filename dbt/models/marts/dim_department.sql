@@ -1,14 +1,13 @@
-with emp (
+with emp as (
     select DepartmentID
         , count(EmployeeID) as NumberOfEmployee
-    from ref('stg_empCurrentDepartment')
+    from {{ref('stg_empCurrentDepartment')}}
     group by DepartmentID
 )
-
-select DepartmentID
-	, Name
-	, GroupName
+select d.DepartmentID
+	, d.Name
+	, d.GroupName
     , NumberOfEmployee
-	, ModifiedDate 
+	, d.ModifiedDate 
 from {{source('hr', 'Department')}} d
-left join emp on d.DepartmentID = emp.DepartmentID;
+left join emp on d.DepartmentID = emp.DepartmentID

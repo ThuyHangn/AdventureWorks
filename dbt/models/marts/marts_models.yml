@@ -26,7 +26,7 @@ models:
         tests:
           - relationships:
               to: ref('dim_address')
-              field: AdressID
+              field: AddressID
       - name: DepartmentID
         tests:
           - relationships:
@@ -36,7 +36,7 @@ models:
   - name: dim_address
     description: The address location of all business entity
     columns:
-      - name: AdressID
+      - name: AddressID
         description: Primary key for table
         tests:
           - unique

@@ -26,4 +26,4 @@ sources:
     database: AdventureWorks2022
     schema: Sales
     tables:
-      - name: 
+      - name: customers

@@ -15,7 +15,7 @@ select e.BusinessEntityID as EmployeeID
 	, e.LoginID
 	, e.ModifiedDate
 from {{source('hr', 'Employee')}} e
-left join {{ref('stg_empCurrentDepartment')}} d on e.BusinessEntityID = d.BusinessEntityID
+left join {{ref('stg_empCurrentDepartment')}} d on e.BusinessEntityID = d.EmployeeID
 left join {{source('person','Person')}} p on e.BusinessEntityID = p.BusinessEntityID
 left join {{source('person', 'BusinessEntity')}} be on p.BusinessEntityID = be.BusinessEntityID
 left join {{source('person', 'BusinessEntityAddress')}} bea on be.BusinessEntityID = bea.BusinessEntityID

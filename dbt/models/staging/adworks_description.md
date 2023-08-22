@@ -20,7 +20,7 @@ One of the following values:
 
 {% enddocs %}
 
-{% docs Shift %}
+{% docs shift %}
 
 One of the following values: 
 
