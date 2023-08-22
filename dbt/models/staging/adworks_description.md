@@ -31,3 +31,31 @@ One of the following values:
 | 3       | Night     | 23:00                  | 07:00              |
 
 {% enddocs %}
+
+{% docs person_type %}
+
+One of the following values
+
+| Values       | Description                    |
+|--------------|--------------------------------|
+| SC           | Store Contact                  |
+| IN           | Individual (retail) customer   |
+| SP           | Sales person                   |
+| EM           | Employee (non-sales)           |
+| VC           | Vendor Contact                 |
+| GC           | General Contact                |
+
+{% enddocs %}
+
+
+{% docs EmailPromotion %}
+
+One of the following values: 
+
+| values | definition                                                                   |
+|--------|------------------------------------------------------------------------------|
+| 0      | Contact does not wish to receive e-mail promotions                           |
+| 1      | Contact wish to receive e-mail promotions from AdWorks                       |
+| 2      | Contact wish to receive e-mail promotions from AdWorks and selected partners |
+
+{% enddocs %}

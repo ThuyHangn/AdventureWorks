@@ -70,3 +70,24 @@ models:
         tests:
           - unique
           - not_null
+
+  - name: dim_customers
+    description: the information of customers
+    columns:
+      - name: CustomerID
+        description: Primary key for table
+        tests:
+          - unique
+          - not_null
+      - name: StoreID
+        description: Foreign key to dim_stores table
+      - name: PersonType
+        description: '{{doc("person_type")}}'
+      - name: EmailPromotion
+        description: '{{doc("EmailPromotion")}}'
+      - name: AddressID
+        description: Foreign key to dim_address table
+        tests:
+          - relationships:
+              to: ref('dim_address')
+              field: AddressID
