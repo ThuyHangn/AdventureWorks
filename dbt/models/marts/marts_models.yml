@@ -16,19 +16,35 @@ models:
   
   - name: dim_employee
     description: The information of employee
-      columns:
-        - name: EmployeeID
-          description: Primary key for table
-          tests:
-            - unique
-            - not_null
-        - name: AddressID
-          tests:
-            - relationships:
-                to: ref('dim_address')
-                field: AdressID
-        - name: DepartmentID
-          tests:
-            - relationships:
-                to: ref('dim_department')
-                field: DepartmentID
+    columns:
+      - name: EmployeeID
+        description: Primary key for table
+        tests:
+          - unique
+          - not_null
+      - name: AddressID
+        tests:
+          - relationships:
+              to: ref('dim_address')
+              field: AdressID
+      - name: DepartmentID
+        tests:
+          - relationships:
+              to: ref('dim_department')
+              field: DepartmentID
+
+  - name: dim_address
+    description: The address location of all business entity
+    columns:
+      - name: AdressID
+        description: Primary key for table
+        tests:
+          - unique
+          - not_null
+      - name: StateProvinceID
+        description: Foreign key to dim_stateProvince table
+        tests:
+          - relationships:
+              to: ref('dim_stateProvince')
+              field: StateProvinceID
+

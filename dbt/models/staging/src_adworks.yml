@@ -20,6 +20,7 @@ sources:
       - name: BusinessEntity
       - name: BusinessEntityAddress
       - name: AddressType
+      - name: Address
 
   - name: sales
     database: AdventureWorks2022
