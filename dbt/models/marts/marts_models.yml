@@ -112,7 +112,27 @@ models:
               field: AddressID
       - name: SalesPersonID
         description: The sales person work in store, foreign key to dim_salesPerson table
-        
+        tests:
+          - relationships:
+              to: ref('dim_salesPerson')
+              field: EmployeeID
       - name: EmailPromotion
         description: '{{doc("EmailPromotion")}}'
-        
+
+  - name: dim_salesPerson
+    description: The information of sales person in company
+    columns:
+      - name: EmployeeID
+        description: Primary Key for the table
+        tests:
+          - unique
+          - not_null
+      - name: TerritoryID
+        description: Foreign key to dim_Territory table
+      - name: SalesQuota
+        description: Projected yearly sales
+      - name: Bonus
+        description: bonus due if quota is met
+      - name: CommissionPct
+        description: commission percent received per sale
+

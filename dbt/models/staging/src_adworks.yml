@@ -37,3 +37,4 @@ sources:
       - name: Store
       - name: vStoreWithContacts
       - name: vStoreWithDemographics
+      - name: SalesPerson
