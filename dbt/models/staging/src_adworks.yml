@@ -34,3 +34,6 @@ sources:
       - name: PersonCreditCard
       - name: CreditCard
       - name: vPersonDemographics
+      - name: Store
+      - name: vStoreWithContacts
+      - name: vStoreWithDemographics

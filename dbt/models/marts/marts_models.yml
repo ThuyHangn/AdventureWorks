@@ -81,6 +81,10 @@ models:
           - not_null
       - name: StoreID
         description: Foreign key to dim_stores table
+        tests:
+          - relationships:
+              to: ref('dim_stores')
+              field: StoreID
       - name: PersonType
         description: '{{doc("person_type")}}'
       - name: EmailPromotion
@@ -91,3 +95,24 @@ models:
           - relationships:
               to: ref('dim_address')
               field: AddressID
+
+  - name: dim_stores
+    description: the information of stores
+    columns:
+      - name: StoreID
+        description: Primary key for table
+        tests:
+          - unique
+          - not_null
+      - name: AddressID
+        description: Foreign key to dim_address table
+        tests:
+          - relationships:
+              to: ref('dim_address')
+              field: AddressID
+      - name: SalesPersonID
+        description: The sales person work in store, foreign key to dim_salesPerson table
+        
+      - name: EmailPromotion
+        description: '{{doc("EmailPromotion")}}'
+        
