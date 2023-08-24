@@ -136,3 +136,19 @@ models:
       - name: CommissionPct
         description: commission percent received per sale
 
+  - name: fact_orderHeader
+    description: The order information placed
+    columns:
+      - name: SalesOrderID
+        description: The primary key for table
+        tests:
+          - unique
+          - not_null
+
+  - name: fact_orderDetail
+    columns: 
+      - name: SalesOrderDetailID
+        description: primary key
+        tests: 
+          - unique
+          - not_null

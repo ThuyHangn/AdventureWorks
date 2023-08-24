@@ -38,3 +38,5 @@ sources:
       - name: vStoreWithContacts
       - name: vStoreWithDemographics
       - name: SalesPerson
+      - name: SalesOrderHeader
+      - name: SalesOrderDetail
