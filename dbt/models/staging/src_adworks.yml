@@ -40,3 +40,4 @@ sources:
       - name: SalesPerson
       - name: SalesOrderHeader
       - name: SalesOrderDetail
+      - name: SpecialOffer

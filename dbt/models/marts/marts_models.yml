@@ -152,3 +152,19 @@ models:
         tests: 
           - unique
           - not_null
+      - name: SpecialOfferID
+        description: The special offer apply for product in orders - Foreign key to dim_specialOffer table
+        tests:
+          - relationships:
+              to: ref('dim_specialOffer')
+              field: SpecialOfferID
+
+  - name: dim_specialOffer
+    description: The detail information about special offer apply for product
+    columns:
+      - name: SpecialOfferID
+        description: Primary key for table
+        tests:
+          - unique
+          - not_null
+          
