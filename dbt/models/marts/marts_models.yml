@@ -58,3 +58,113 @@ models:
           - not_null
       - name: Territory ID
         description: Foreign Key to dim_territory table
+        tests:
+          - relationships:
+              to: ref('dim_territory')
+              field: TerritoryID
+
+  - name: dim_territory
+    columns:
+      - name: TerritoryID
+        description: Primary key for table
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_customers
+    description: the information of customers
+    columns:
+      - name: CustomerID
+        description: Primary key for table
+        tests:
+          - unique
+          - not_null
+      - name: StoreID
+        description: Foreign key to dim_stores table
+        tests:
+          - relationships:
+              to: ref('dim_stores')
+              field: StoreID
+      - name: PersonType
+        description: '{{doc("person_type")}}'
+      - name: EmailPromotion
+        description: '{{doc("EmailPromotion")}}'
+      - name: AddressID
+        description: Foreign key to dim_address table
+        tests:
+          - relationships:
+              to: ref('dim_address')
+              field: AddressID
+
+  - name: dim_stores
+    description: the information of stores
+    columns:
+      - name: StoreID
+        description: Primary key for table
+        tests:
+          - unique
+          - not_null
+      - name: AddressID
+        description: Foreign key to dim_address table
+        tests:
+          - relationships:
+              to: ref('dim_address')
+              field: AddressID
+      - name: SalesPersonID
+        description: The sales person work in store, foreign key to dim_salesPerson table
+        tests:
+          - relationships:
+              to: ref('dim_salesPerson')
+              field: EmployeeID
+      - name: EmailPromotion
+        description: '{{doc("EmailPromotion")}}'
+
+  - name: dim_salesPerson
+    description: The information of sales person in company
+    columns:
+      - name: EmployeeID
+        description: Primary Key for the table
+        tests:
+          - unique
+          - not_null
+      - name: TerritoryID
+        description: Foreign key to dim_Territory table
+      - name: SalesQuota
+        description: Projected yearly sales
+      - name: Bonus
+        description: bonus due if quota is met
+      - name: CommissionPct
+        description: commission percent received per sale
+
+  - name: fact_orderHeader
+    description: The order information placed
+    columns:
+      - name: SalesOrderID
+        description: The primary key for table
+        tests:
+          - unique
+          - not_null
+
+  - name: fact_orderDetail
+    columns: 
+      - name: SalesOrderDetailID
+        description: primary key
+        tests: 
+          - unique
+          - not_null
+      - name: SpecialOfferID
+        description: The special offer apply for product in orders - Foreign key to dim_specialOffer table
+        tests:
+          - relationships:
+              to: ref('dim_specialOffer')
+              field: SpecialOfferID
+
+  - name: dim_specialOffer
+    description: The detail information about special offer apply for product
+    columns:
+      - name: SpecialOfferID
+        description: Primary key for table
+        tests:
+          - unique
+          - not_null
+          

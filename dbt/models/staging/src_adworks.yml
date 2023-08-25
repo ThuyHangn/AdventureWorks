@@ -9,8 +9,6 @@ sources:
       - name: Employee
       - name: EmployeeDepartmentHistory
       - name: EmployeePayHistory
-      - name: JobCandidate
-      - name: Shift
 
   - name: person
     database: AdventureWorks2022
@@ -23,9 +21,23 @@ sources:
       - name: Address
       - name: StateProvince
       - name: CountryRegion
+      - name: EmailAddress
+      - name: PersonPhone
+      - name: PhoneNumberType
 
   - name: sales
     database: AdventureWorks2022
     schema: Sales
     tables:
-      - name: customers
+      - name: Customer
+      - name: SalesTerritory
+      - name: PersonCreditCard
+      - name: CreditCard
+      - name: vPersonDemographics
+      - name: Store
+      - name: vStoreWithContacts
+      - name: vStoreWithDemographics
+      - name: SalesPerson
+      - name: SalesOrderHeader
+      - name: SalesOrderDetail
+      - name: SpecialOffer
