@@ -41,3 +41,14 @@ sources:
       - name: SalesOrderHeader
       - name: SalesOrderDetail
       - name: SpecialOffer
+
+  - name: prod
+    database: AdventureWorks2022
+    schema: Production
+    tables:
+      - name: Product
+      - name: ProductSubCategory
+      - name: ProductCategory
+      - name: ProductModel
+      - name: ProductInventory
+      - name: Location

@@ -4,4 +4,5 @@ select TerritoryID
 	, cr.Name as CountryRegion
 	, st."Group"
 from {{source('sales','SalesTerritory')}} st
-left join {{source('person','CountryRegion')}} cr on st.CountryRegionCode = cr.CountryRegionCode;
+left join {{source('person','CountryRegion')}} cr 
+	on st.CountryRegionCode = cr.CountryRegionCode;

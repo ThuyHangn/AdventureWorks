@@ -59,3 +59,25 @@ One of the following values:
 | 2      | Contact wish to receive e-mail promotions from AdWorks and selected partners |
 
 {% enddocs %}
+
+{% docs Product_MakeFlag %}
+
+One of the following values:
+
+| Values        | Description                           |
+|---------------|---------------------------------------|
+| 0             | Product is purchased                  |
+| 1             | Product is manufactured in-house      |
+
+{% enddocs %}
+
+{% docs Product_FinishedGoodsFlag %}
+
+One of the following values:
+
+| Values        | Description                           |
+|---------------|---------------------------------------|
+| 0             | Product is not a salable item         |
+| 1             | Product is salable                    |
+
+{% enddocs %}

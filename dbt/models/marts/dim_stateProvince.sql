@@ -6,4 +6,5 @@ select sp.StateProvinceID
 	, sp.TerritoryID
 	, sp.ModifiedDate
 from {{source('person','StateProvince')}} sp 
-left join {{source('person','CountryRegion')}} cr on sp.CountryRegionCode= cr.CountryRegionCode;
+left join {{source('person','CountryRegion')}} cr 
+    on sp.CountryRegionCode= cr.CountryRegionCode;

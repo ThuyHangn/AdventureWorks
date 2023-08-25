@@ -168,3 +168,91 @@ models:
           - unique
           - not_null
           
+  - name: dim_products
+    description: The information of products that company sell
+    columns:
+      - name: ProductID
+        description: Primary key for table
+        tests:
+          - unique
+          - not_null
+      - name: MakeFlag
+        description: '{{doc("Product_MakeFlag")}}'
+        tests:
+          - accepted_values:
+              values: [0,1]
+      - name: FinishedGoodsFlag
+        description: '{{doc("Product_FinishedGoodsFlag")}}'
+        tests:
+          - accepted_values:
+              values: [0,1]
+      - name: ProductSubCategoryID
+        tests:
+          - relationships:
+              to: ref('dim_productSubCategory')
+              field: ProductSubCategoryID
+      - name: ProductModelID
+        desctiption: Foreign key link to dim_productModel
+        tests:
+          - relationships:
+              to: ref('dim_productModel')
+              field: ProductModelID
+  
+  - name: dim_productSubCategory
+    description: Sub category of product table
+    columns:
+      - name: ProductSubCategoryID
+        desctiption: Primary key for table
+        tests:
+          - unique
+          - not_null 
+      - name: ProductCategoryID
+        description: Foreign key link to dim_productCategory table
+        tests:
+          - relationships:
+              to: ref('dim_productCategory')
+              field: ProductCategoryID
+
+  - name: dim_productCategory
+    desctiption: Category table
+    columns:
+      - name: ProductCategoryID
+        description: Primary key for table
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_productModel
+    desctiption: the model detail of product
+    columns:
+      - name: ProductModelID
+        description: Primary key for table
+        tests:
+          - unique
+          - not_null
+  
+  - name: dim_productInventory
+    description: Number of products varaiable in inventory
+    columns:
+      - name: ProductID
+        description: Foreign key link to dim_products table to get product information
+        tests:
+          - relationships:
+              to: ref('dim_products')
+              field: ProductID
+      - name: LocationID
+        desctiption: Foreign key link to dim_inventoryLocaion to get location infor
+        tests:
+          - relationships:
+              to: ref('dim_inventoryLocation')
+              field: LocationID
+      
+  - name: dim_inventoryLocation
+    description: the information of inventory location
+    columns:
+      - name: LocationID
+        description: Primary key for table
+        tests:
+          - unique
+          - not_null
+      
