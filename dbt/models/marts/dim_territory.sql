@@ -6,3 +6,4 @@ select TerritoryID
 from {{source('sales','SalesTerritory')}} st
 left join {{source('person','CountryRegion')}} cr 
 	on st.CountryRegionCode = cr.CountryRegionCode;
+ 

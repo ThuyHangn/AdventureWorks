@@ -81,3 +81,30 @@ One of the following values:
 | 1             | Product is salable                    |
 
 {% enddocs %}
+
+{% docs purchaseOrder_status %}
+
+Order current status:
+
+| Status        | Description                           |
+|---------------|---------------------------------------|
+| 1             | Pending                               |
+| 2             | Approved                              |
+| 3             | Rejected                              |
+| 4             | Completed                             |
+
+{% enddocs %}
+
+{% docs Vendor_CreditRating %}
+
+One of the following value:
+
+| Value         | Description                           |
+|---------------|---------------------------------------|
+| 1             | Superior                              |
+| 2             | Excellent                             |
+| 3             | Above Average                         |
+| 4             | Average                               |
+| 5             | Below Average                         |
+
+{% enddocs %}

@@ -24,6 +24,8 @@ sources:
       - name: EmailAddress
       - name: PersonPhone
       - name: PhoneNumberType
+      - name: BusinessEntityContact
+      - name: ContactType
 
   - name: sales
     database: AdventureWorks2022
@@ -52,3 +54,16 @@ sources:
       - name: ProductModel
       - name: ProductInventory
       - name: Location
+      - name: WorkOrder
+      - name: WorkOrderRouting
+      - name: ScrapReason
+
+  - name: purchase
+    database: AdventureWorks2022
+    schema: Purchasing
+    tables:
+      - name: PurchaseOrderHeader
+      - name: PurchaseOrderDetail
+      - name: Vendor
+      - name: ProductVendor
+      - name: ShipMethod

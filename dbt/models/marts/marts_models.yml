@@ -256,3 +256,136 @@ models:
           - unique
           - not_null
       
+  - name: fact_purchaseOrder
+    description: purchase order are placed
+    columns:
+      - name: PurchaseOrderID
+        description: Primary key for table
+        tests:
+          - unique
+          - not_null
+      - name: EmployeeID
+        description: Employee placed an order, foreign key to dim_employee table
+        tests:
+          - relationships:
+              to: ref('dim_employee')
+              field: EmployeeID
+      - name: VendorID
+        description: The vendor provide product in purchase order
+        tests:
+          - relationships:
+              to: ref('dim_vendor')
+              field: VendorID
+      - name: ShipMethodID
+        description: The method of shipment
+      - name: Status
+        description: '{{doc("purchaseOrder_status")}}'
+        tests:
+          - accepted_values:
+              values: [1,2,3,4]
+
+  - name: fact_purchaseOrderDetail
+    description: the purchase order detail 
+    columns:
+      - name: PurchaseOrderDetailID
+        description: primary key for table
+        tests:
+          - unique
+          - not_null
+      - name: PurchaseOrderID
+        description: Foreign key link to fact_purchaseOrder table
+        tests:
+          - relationships:
+              to: ref('fact_purchaseOrder')
+              field: PurchaseOrderID
+      - name: ProductID
+        description: Foreign key to dim_products table
+        tests:  
+          - relationships:
+              to: ref('dim_priducts')
+              field: ProductID
+
+  - name: dim_vendor
+    description: full information about vendor
+    columns:
+      - name: VendorID
+        description: Primary key for table
+        tests:
+          - unique
+          - not_null
+      - name: CreditRating
+        description: '{{doc("Vendor_CreditRating")}}'
+        tests:
+          - accepted_values:
+              values: [1,2,3,4,5]
+      - name: PreferredVendorStatus
+        description: >
+          0 = Do not use if another vendor is available. 
+          1 = Preferred over other vendors supplying the same product.
+        tests:
+          - accepted_values:
+              values: [0,1]
+      - name: ActiveFlag
+        description: >
+          0 - Vendor  no longer used.
+          1 - Vender is actively used.
+        tests:
+          - accepted_values:
+              values: [0,1]
+
+  - name: dim_productVendor
+    description: Vendor with the products they supply
+    columns:
+      - name: ProductID
+        description: product supplied by vendor
+        tests:
+          - relationships:
+              to: ref('dim_products')
+              field: ProductID
+      - name: VendorID
+        tests:
+          - relationships:
+              to: ref('dim_vendor')
+              field: VendorID
+          - not_null
+
+  - name: fact_workOrder
+    description: manufacturing work order
+    columns:
+      - name: WorkOrderID
+        description: Primary key for table
+        tests:
+          - unique
+          - not_null 
+      - name: ProductID
+        tests:
+          - relationships:
+              to: ref('dim_products')
+              field: ProductID
+      - name: StockedQty
+        description: number products are built. StockedQty = OrderQty - ScrappedQty
+      - name: ScrapReasonID
+        description: Foreign key to sdim_scrappedReason table
+        tests:
+          - relationships:
+              to: ref('dim_scrapReason')
+              field: ScrapReasonID
+  - name: fact_workOrderRouting
+    description: work order detail
+    columns:
+      - name: WorkOrderID
+        description: Foreign key to workOrder table
+        tests:
+          - relationships:
+              to: ref('fact_workOrder')
+              field: WorkOrderID
+      - name: ProductID
+        tests:
+          - relationships:
+              to: ref('dim_products')
+              field: ProductID
+      - name: LocationID
+        tests:
+          - relationships:
+              to: ref('dim_inventoryLocation')
+              field: LocationID
