@@ -31,3 +31,392 @@ models:
           - relationships:
               to: ref('dim_employee')
               field: EmployeeID
+
+  - name: stg_department
+    description: The information of department
+    columns:
+      - name: DepartmentID
+        description: The primary key for table
+        tests:
+          - unique
+          - not_null
+      - name: Name 
+        description: The name of department
+      - name: NumberOfEmployee
+        description: The number of employee in deparment
+  
+  - name: stg_employee
+    description: The information of employee
+    columns:
+      - name: EmployeeID
+        description: Primary key for table
+        tests:
+          - unique
+          - not_null
+      - name: AddressID
+        tests:
+          - relationships:
+              to: ref('stg_address')
+              field: AddressID
+      - name: DepartmentID
+        tests:
+          - relationships:
+              to: ref('stg_department')
+              field: DepartmentID
+
+  - name: stg_address
+    description: The address location of all business entity
+    columns:
+      - name: AddressID
+        description: Primary key for table
+        tests:
+          - unique
+          - not_null
+      - name: StateProvinceID
+        description: Foreign key to stg_stateProvince table
+        tests:
+          - relationships:
+              to: ref('stg_stateProvince')
+              field: StateProvinceID
+
+  - name: stg_stateProvince
+    description: the state province information for address
+    columns:
+      - name: StateProvinceID
+        description: Primary key for table
+        tests:
+          - unique
+          - not_null
+      - name: Territory ID
+        description: Foreign Key to stg_territory table
+        tests:
+          - relationships:
+              to: ref('stg_territory')
+              field: TerritoryID
+
+  - name: stg_territory
+    columns:
+      - name: TerritoryID
+        description: Primary key for table
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_customers
+    description: the information of customers
+    columns:
+      - name: CustomerID
+        description: Primary key for table
+        tests:
+          - unique
+          - not_null
+      - name: StoreID
+        description: Foreign key to stg_stores table
+        tests:
+          - relationships:
+              to: ref('stg_stores')
+              field: StoreID
+      - name: PersonType
+        description: '{{doc("person_type")}}'
+      - name: EmailPromotion
+        description: '{{doc("EmailPromotion")}}'
+      - name: AddressID
+        description: Foreign key to stg_address table
+        tests:
+          - relationships:
+              to: ref('stg_address')
+              field: AddressID
+
+  - name: stg_stores
+    description: the information of stores
+    columns:
+      - name: StoreID
+        description: Primary key for table
+        tests:
+          - unique
+          - not_null
+      - name: AddressID
+        description: Foreign key to stg_address table
+        tests:
+          - relationships:
+              to: ref('stg_address')
+              field: AddressID
+      - name: SalesPersonID
+        description: The sales person work in store, foreign key to stg_salesPerson table
+        tests:
+          - relationships:
+              to: ref('stg_salesPerson')
+              field: EmployeeID
+      - name: EmailPromotion
+        description: '{{doc("EmailPromotion")}}'
+
+  - name: stg_salesPerson
+    description: The information of sales person in company
+    columns:
+      - name: EmployeeID
+        description: Primary Key for the table
+        tests:
+          - unique
+          - not_null
+      - name: TerritoryID
+        description: Foreign key to stg_Territory table
+      - name: SalesQuota
+        description: Projected yearly sales
+      - name: Bonus
+        description: bonus due if quota is met
+      - name: CommissionPct
+        description: commission percent received per sale
+
+  - name: stg_orderHeader
+    description: The order information placed
+    columns:
+      - name: SalesOrderID
+        description: The primary key for table
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_orderDetail
+    columns: 
+      - name: SalesOrderDetailID
+        description: primary key
+        tests: 
+          - unique
+          - not_null
+      - name: SpecialOfferID
+        description: The special offer apply for product in orders - Foreign key to stg_specialOffer table
+        tests:
+          - relationships:
+              to: ref('stg_specialOffer')
+              field: SpecialOfferID
+
+  - name: stg_specialOffer
+    description: The detail information about special offer apply for product
+    columns:
+      - name: SpecialOfferID
+        description: Primary key for table
+        tests:
+          - unique
+          - not_null
+          
+  - name: stg_products
+    description: The information of products that company sell
+    columns:
+      - name: ProductID
+        description: Primary key for table
+        tests:
+          - unique
+          - not_null
+      - name: MakeFlag
+        description: '{{doc("Product_MakeFlag")}}'
+        tests:
+          - accepted_values:
+              values: [0,1]
+      - name: FinishedGoodsFlag
+        description: '{{doc("Product_FinishedGoodsFlag")}}'
+        tests:
+          - accepted_values:
+              values: [0,1]
+      - name: ProductSubCategoryID
+        tests:
+          - relationships:
+              to: ref('stg_productSubCategory')
+              field: ProductSubCategoryID
+      - name: ProductModelID
+        desctiption: Foreign key link to stg_productModel
+        tests:
+          - relationships:
+              to: ref('stg_productModel')
+              field: ProductModelID
+  
+  - name: stg_productSubCategory
+    description: Sub category of product table
+    columns:
+      - name: ProductSubCategoryID
+        desctiption: Primary key for table
+        tests:
+          - unique
+          - not_null 
+      - name: ProductCategoryID
+        description: Foreign key link to stg_productCategory table
+        tests:
+          - relationships:
+              to: ref('stg_productCategory')
+              field: ProductCategoryID
+
+  - name: stg_productCategory
+    desctiption: Category table
+    columns:
+      - name: ProductCategoryID
+        description: Primary key for table
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_productModel
+    desctiption: the model detail of product
+    columns:
+      - name: ProductModelID
+        description: Primary key for table
+        tests:
+          - unique
+          - not_null
+  
+  - name: stg_productInventory
+    description: Number of products varaiable in inventory
+    columns:
+      - name: ProductID
+        description: Foreign key link to stg_products table to get product information
+        tests:
+          - relationships:
+              to: ref('stg_products')
+              field: ProductID
+      - name: LocationID
+        desctiption: Foreign key link to stg_inventoryLocaion to get location infor
+        tests:
+          - relationships:
+              to: ref('stg_inventoryLocation')
+              field: LocationID
+      
+  - name: stg_inventoryLocation
+    description: the information of inventory location
+    columns:
+      - name: LocationID
+        description: Primary key for table
+        tests:
+          - unique
+          - not_null
+      
+  - name: stg_purchaseOrder
+    description: purchase order are placed
+    columns:
+      - name: PurchaseOrderID
+        description: Primary key for table
+        tests:
+          - unique
+          - not_null
+      - name: EmployeeID
+        description: Employee placed an order, foreign key to stg_employee table
+        tests:
+          - relationships:
+              to: ref('stg_employee')
+              field: EmployeeID
+      - name: VendorID
+        description: The vendor provide product in purchase order
+        tests:
+          - relationships:
+              to: ref('stg_vendor')
+              field: VendorID
+      - name: ShipMethodID
+        description: The method of shipment
+      - name: Status
+        description: '{{doc("purchaseOrder_status")}}'
+        tests:
+          - accepted_values:
+              values: [1,2,3,4]
+
+  - name: stg_purchaseOrderDetail
+    description: the purchase order detail 
+    columns:
+      - name: PurchaseOrderDetailID
+        description: primary key for table
+        tests:
+          - unique
+          - not_null
+      - name: PurchaseOrderID
+        description: Foreign key link to stg_purchaseOrder table
+        tests:
+          - relationships:
+              to: ref('stg_purchaseOrder')
+              field: PurchaseOrderID
+      - name: ProductID
+        description: Foreign key to stg_products table
+        tests:  
+          - relationships:
+              to: ref('stg_products')
+              field: ProductID
+
+  - name: stg_vendor
+    description: full information about vendor
+    columns:
+      - name: VendorID
+        description: Primary key for table
+        tests:
+          - unique
+          - not_null
+      - name: CreditRating
+        description: '{{doc("Vendor_CreditRating")}}'
+        tests:
+          - accepted_values:
+              values: [1,2,3,4,5]
+      - name: PreferredVendorStatus
+        description: >
+          0 = Do not use if another vendor is available. 
+          1 = Preferred over other vendors supplying the same product.
+        tests:
+          - accepted_values:
+              values: [0,1]
+      - name: ActiveFlag
+        description: >
+          0 - Vendor  no longer used.
+          1 - Vender is actively used.
+        tests:
+          - accepted_values:
+              values: [0,1]
+
+  - name: stg_productVendor
+    description: Vendor with the products they supply
+    columns:
+      - name: ProductID
+        description: product supplied by vendor
+        tests:
+          - relationships:
+              to: ref('stg_products')
+              field: ProductID
+      - name: VendorID
+        tests:
+          - relationships:
+              to: ref('stg_vendor')
+              field: VendorID
+          - not_null
+
+  - name: stg_workOrder
+    description: manufacturing work order
+    columns:
+      - name: WorkOrderID
+        description: Primary key for table
+        tests:
+          - unique
+          - not_null 
+      - name: ProductID
+        tests:
+          - relationships:
+              to: ref('stg_products')
+              field: ProductID
+      - name: StockedQty
+        description: number products are built. StockedQty = OrderQty - ScrappedQty
+      - name: ScrapReasonID
+        description: Foreign key to sstg_scrappedReason table
+        tests:
+          - relationships:
+              to: ref('stg_scrapReason')
+              field: ScrapReasonID
+  - name: stg_workOrderRouting
+    description: work order detail
+    columns:
+      - name: WorkOrderID
+        description: Foreign key to workOrder table
+        tests:
+          - relationships:
+              to: ref('stg_workOrder')
+              field: WorkOrderID
+      - name: ProductID
+        tests:
+          - relationships:
+              to: ref('stg_products')
+              field: ProductID
+      - name: LocationID
+        tests:
+          - relationships:
+              to: ref('stg_inventoryLocation')
+              field: LocationID
